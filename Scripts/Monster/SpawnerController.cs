@@ -14,14 +14,14 @@ public class SpawnerController : Subject
 
     private void Start()
     {
-        isStarted = StartWave;
-        isStopped = StopWave;
+        isStarted = StartSpawn;
+        isStopped = StopSpawn;
     }
 
     public WaveInfo GetWaveInfo() => this.waveInfo;
     public bool GetSpawnState() => this._spawnState;
 
-    public void StartWave()
+    public void StartSpawn()
     {
         Monster.dieFlag = false;
         _spawnState = true;
@@ -31,7 +31,7 @@ public class SpawnerController : Subject
         NotifyObservers();
     }
 
-    public void StopWave()
+    public void StopSpawn()
     {
         Monster.dieFlag = true;
         _spawnState = false;

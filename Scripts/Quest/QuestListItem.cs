@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [ResourceInfo("QuestListItem", 20, -262)]
-public class QuestListItem : UIBase
+public class QuestListItem : UI
 {
     [SerializeField] private Text questNameText;
     [SerializeField] private Text questTypeText;
@@ -25,5 +25,5 @@ public class QuestListItem : UIBase
         else if(questTypeText.text == Define.QuestType.Epic.ToString()) { questTypeText.color = Color.red; }
     }
 
-    public override void Open(UIParam param) { }
+    public override void Open(UIParameter param) { }
 }

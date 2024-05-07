@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [ResourceInfo("SettingsUI")]
-public class SettingsUI : UIPopup
+public class SettingsUI : Popup
 {
     [SerializeField] private Button saveButton;
     [SerializeField] private Text saveButtonText;
@@ -73,7 +73,7 @@ public class SettingsUI : UIPopup
 #endif
     }
 
-    public override void Open(UIParam param)
+    public override void Open(UIParameter param)
     {
         base.Open(param);
         AddButtonFunc();

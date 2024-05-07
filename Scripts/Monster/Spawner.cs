@@ -4,44 +4,32 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class Spawner : IObserver
+public class Spawner : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPoint;
     [SerializeField] private Renderer _renderer;
     [SerializeField] private Light portalLight;
     [SerializeField] private ParticleSystem portalEffect;
 
+    public static bool stopFlag = false;
+
     private WaveInfo waveInfo;
-    private bool spawnState;
-    private SpawnerController spawnerController;
     private int randomObjNum;
     private int randomPoint;
+    private int instantiateCount = 0;
 
     private float waitForSeconds = 3.0f;
 
     private Coroutine instantiate = null;
 
-
-    public override void Notify(Subject subject)
-    {
-        if(!spawnerController) spawnerController = subject.GetComponent<SpawnerController>();
-
-        this.waveInfo = spawnerController.GetWaveInfo();
-        this.spawnState = spawnerController.GetSpawnState();
-
-        if(spawnState)
-            Spawn(this.waveInfo);
-
-        if(!spawnState)
-            StopSpawn();
-    }
-
     public void Spawn(WaveInfo waveInfo)
     {
+        stopFlag = false;
         this.waveInfo = waveInfo;
 
         if (waveInfo.waveType != Define.WaveType.Boss)
         {
+            StartCoroutine(CheckFlag());
             instantiate = StartCoroutine(Instantiate());
             ChangeSpawnerColor();
             OnEffect();
@@ -55,16 +43,38 @@ public abstract class Spawner : IObserver
     }
     private IEnumerator Instantiate()
     {
-        while(true)
+        while (true)
         {
             yield return YieldCache.GetCachedTimeInterval(waitForSeconds);
-            InstantiateNormalMonster();
+
+            instantiateCount = GameManager.Instance.GetInstantiateCount();
+            if (instantiateCount >= waveInfo.monsterCount)
+                yield return null;
+
+            if (stopFlag == false)
+            {
+                InstantiateNormalMonster();
+                GameManager.Instance.AddInstantiateCount();
+            }
         }
     }
 
+    private IEnumerator CheckFlag()
+    {
+        while (true)
+        {
+            if (stopFlag)
+            {
+                StopSpawn();
+                yield break;
+            }
+            yield return null;
+        }
+    }
     public void StopSpawn()
     {
         StopAllCoroutines();
+        instantiateCount = 0;
         OffEffect();
     }
 
@@ -88,12 +98,12 @@ public abstract class Spawner : IObserver
 
     private void ChangeSpawnerColor()
     {
-        foreach(var monster in waveInfo.monsterPrefabs)
+        foreach (var monster in waveInfo.monsterPrefabs)
         {
-            if(waveInfo.waveType == Define.WaveType.Boss)
+            if (waveInfo.waveType == Define.WaveType.Boss)
             {
                 var changedColor = Color.black;
-                foreach(var material in _renderer.materials)
+                foreach (var material in _renderer.materials)
                     _renderer.material.color = changedColor;
             }
             else

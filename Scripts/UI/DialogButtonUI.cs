@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class DialogButtonUI : IObserver
+public class DialogButtonUI : MonoBehaviour
 {
     [SerializeField] private Button shopButton;
     [SerializeField] private Text shopButtonText;
@@ -50,20 +50,20 @@ public abstract class DialogButtonUI : IObserver
     void OpenShop()
     {
         SoundManager.Instance.PlayClip("UIClick");
-        UIManager.Instance.OpenUI<ShopUI>();
+        UIManager.Instance.Open<ShopUI>();
     }
 
     void StartWave()
     {
         SoundManager.Instance.PlayClip("UIClick");
-        SpawnerController.isStarted?.Invoke();
+        GameManager.Instance.StartWave();
         CloseDialog();
     }
 
     void CloseDialog()
     {
         SoundManager.Instance.PlayClip("UIClick");
-        DialogManager.Instance.CloseDialog(transform.parent.gameObject); 
+        DialogManager.Instance.CloseDialog(transform.parent.gameObject);
     }
 
 }

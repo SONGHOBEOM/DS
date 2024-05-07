@@ -31,15 +31,15 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (this.itemBase == null)
             return;
 
-        if (Util.FindChild<Tooltip>(UIManager.Instance.UI, "Tooltip", false) == null)
+        if (Util.FindChild<Tooltip>(UIManager.Instance.uiRoot.gameObject, "Tooltip", false) == null)
         {
-            var tooltipObject = ResourceManager.Instance.Instantiate<Tooltip>("Tooltip", UIManager.Instance.UI.transform);
+            var tooltipObject = ResourceManager.Instance.Instantiate<Tooltip>("Tooltip", UIManager.Instance.uiRoot);
             tooltipObject.SetupTooltipInfo(this.itemBase);
             tooltipObject.gameObject.SetActive(true);
         }
         else
         {
-            var tooltipObject = Util.FindChild<Tooltip>(UIManager.Instance.UI, "Tooltip", false);
+            var tooltipObject = Util.FindChild<Tooltip>(UIManager.Instance.uiRoot.gameObject, "Tooltip", false);
             tooltipObject.SetupTooltipInfo(this.itemBase);
             tooltipObject.gameObject.SetActive(true);
         }
@@ -50,7 +50,7 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (this.itemBase == null)
             return;
 
-        var tooltipObject = Util.FindChild<Tooltip>(UIManager.Instance.UI, "Tooltip", false);
+        var tooltipObject = Util.FindChild<Tooltip>(UIManager.Instance.uiRoot.gameObject, "Tooltip", false);
         tooltipObject.gameObject.SetActive(false);
     }
 }

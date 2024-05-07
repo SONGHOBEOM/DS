@@ -35,6 +35,13 @@ public class PoolManager : Singleton<PoolManager>
 
         _pool[name].Push(poolable);
     }
+    public Poolable Pop(GameObject original, Transform parent = null)
+    {
+        if (_pool.ContainsKey(original.name) == false)
+            CreatePool(original);
+
+        return _pool[original.name].Pop(parent);
+    }
 
     public void CreatePool(GameObject original, int count = 1)
     {
@@ -45,11 +52,4 @@ public class PoolManager : Singleton<PoolManager>
         _pool.Add(original.name, pool);
     }
 
-    public Poolable Pop(GameObject original, Transform parent = null)
-    {
-        if (_pool.ContainsKey(original.name) == false)
-            CreatePool(original);
-
-        return _pool[original.name].Pop(parent);
-    }
 }

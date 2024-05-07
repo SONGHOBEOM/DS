@@ -160,7 +160,10 @@ public class PatchManager : Singleton<PatchManager>
 
             var spawners = loadedObj.Result.GetComponentsInChildren<Spawner>();
             var surface = loadedObj.Result.GetComponent<NavMeshSurface>();
-            
+            foreach (var spawner in spawners)
+            {
+                GameManager.Instance.AddSpawner(spawner);
+            }
             if (surface == null)
             {
                 surface = loadedObj.Result.AddComponent<NavMeshSurface>();

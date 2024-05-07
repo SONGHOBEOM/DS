@@ -16,10 +16,10 @@ public class HUDButtonUI : MonoBehaviour
 
     public void OnClickOpenInventoryUI()
     {
-        UIManager.Instance.OpenUI<InventoryUI>();
+        UIManager.Instance.Open<InventoryUI>();
         if(EntityManager.Instance.player.questLevel == 1)
             QuestManager.Instance.CompleteQuest();
     }
 
-    public void OnClickOpenSettingsUI() => UIManager.Instance.OpenUI<SettingsUI>();
+    public void OnClickOpenSettingsUI() => UIManager.Instance.Open<SettingsUI>();
 }

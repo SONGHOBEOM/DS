@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 [ResourceInfo("InventoryUI", 511f)]
-public class InventoryUI : UIPopup
+public class InventoryUI : Popup
 {
     [SerializeField] private Transform content;
     [SerializeField] private List<ItemBase> myItems = new List<ItemBase>();
@@ -50,7 +50,7 @@ public class InventoryUI : UIPopup
     }
 
 
-    public override void Open(UIParam param)
+    public override void Open(UIParameter param)
     {
         base.Open(param);
 
@@ -113,5 +113,4 @@ public class InventoryUI : UIPopup
             slot.SetData(itemBase);
         }
     }
-
 }

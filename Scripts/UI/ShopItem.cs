@@ -9,7 +9,7 @@ public class ShopItem : MonoBehaviour,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        UIManager.Instance.OpenUI<PurchasingUI>(new PurchasePopupUIParam(item));
+        UIManager.Instance.Open<PurchasingUI>(new PurchasePopupUIParameter(item));
     }
 
 }

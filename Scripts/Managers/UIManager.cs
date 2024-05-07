@@ -6,24 +6,15 @@ using System;
 
 public class UIManager : Singleton<UIManager>
 {
-    private Dictionary<Type, UIBase> cachedUI = new Dictionary<Type, UIBase>();
-    private Stack<UIBase> uiStack = new Stack<UIBase>();
+    [SerializeField] private Transform _uiRoot;
+    public Transform uiRoot => _uiRoot;
+
+    private Dictionary<Type, UI> cachedUI = new Dictionary<Type, UI>();
+    private Stack<UI> uiStack = new Stack<UI>();
     public bool isDraggingUI = false;
     public bool onDragToRotate = false;
-    public GameObject UI
-    {
-        get
-        {
-            GameObject _ui = GameObject.Find("UserInterface");
-            if (_ui == null)
-            {
-                _ui = new GameObject { name = "UserInterface" };
-            }
-            return _ui;
-        }
-    }
 
-    public void OpenUI<T>(UIParam param = null) where T : UIBase
+    public void Open<T>(UIParameter param = null) where T : UI
     {
         var type = typeof(T); 
 
@@ -33,7 +24,7 @@ public class UIManager : Singleton<UIManager>
             LoadOpen<T>(type, param);
     }
 
-    public void CloseUI<T>() where T : UIBase
+    public void Close<T>() where T : UI
     {
         var type = typeof(T);
         if (cachedUI.ContainsKey(type) == false)
@@ -42,7 +33,7 @@ public class UIManager : Singleton<UIManager>
         DoClose(type);
     }
 
-    private void DoOpen(Type type, UIParam param)
+    private void DoOpen(Type type, UIParameter param)
     {
         if (cachedUI.TryGetValue(type, out var ui))
         {
@@ -54,14 +45,14 @@ public class UIManager : Singleton<UIManager>
             return;
     }
 
-    private void LoadOpen<T>(Type type, UIParam param) where T : UIBase
+    private void LoadOpen<T>(Type type, UIParameter param) where T : UI
     {
         var resourceInfo = type.GetCustomAttribute<ResourceInfo>();
         var name = resourceInfo.resourceName;
-        var ui = ResourceManager.Instance.Instantiate(name, UI.transform);
+        var ui = ResourceManager.Instance.Instantiate(name, uiRoot);
         var rectTransform = ui.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = new Vector2(resourceInfo.posX, resourceInfo.posY);
-        var uibase = ui.GetComponent<T>() as UIBase;
+        var uibase = ui.GetComponent<T>() as UI;
         cachedUI[type] = uibase;
 
         uibase.Open(param);
@@ -78,7 +69,7 @@ public class UIManager : Singleton<UIManager>
             return;
     }
 
-    public UIBase GetActiveUI<T>() where T : UIBase
+    public UI GetActive<T>() where T : UI
     {
         var type = typeof(T);
         if (cachedUI.ContainsKey(type) == false)
@@ -93,9 +84,4 @@ public class UIManager : Singleton<UIManager>
     public void SetIsDraggingUI(bool isDragging) => this.isDraggingUI = isDragging;
 
     public void SetOnDragToRotate(bool onDragToRotate) => this.onDragToRotate = onDragToRotate;
-
-    public void SetSkillSprite(List<SkillData> skillDatas)
-    {
-        CombatUI.setSkillButtons?.Invoke(skillDatas);
-    }
 }

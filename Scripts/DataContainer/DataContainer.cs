@@ -7,31 +7,18 @@ using UnityEngine.UIElements;
 public class DataContainer
 {
     public ItemDataContainer itemDataContainer { get; private set; } = new ItemDataContainer();
-
     public QuestDataContainer questDataContainer { get; private set; } = new QuestDataContainer();
-
     public NpcDataContainer npcDataContainer { get; private set; } = new NpcDataContainer();
-
     public ExpValueDataContainer expValueDataContainer { get; private set; } = new ExpValueDataContainer();
-
     public WaveDataContainer waveDataContainer { get; private set; } = new WaveDataContainer();
-
     public PatternDataContainer patternDataContainer { get; private set; } = new PatternDataContainer();
-
     public StringDataContainer stringDataContainer { get; private set; } = new StringDataContainer();
-
     public SkillDataContainer skillDataContainer { get; private set; } = new SkillDataContainer();
-
     public EffectDataContainter effectDataContainer { get; private set; } = new EffectDataContainter();
-
     public SoundDataContainer soundDataContainer { get; private set; } = new SoundDataContainer();
-
     public CharacterBasicDataContainer characterBasicDataContainer { get; private set; } = new CharacterBasicDataContainer();
-
     public PatchDataContainer patchDataContainer { get; private set; } = new PatchDataContainer();
-
     public ItemContainer itemContainer { get; private set; } = new ItemContainer();
-
     public void Push(ScriptableObject table)
     {
         RegistItemDataContainer<ItemData>(table);

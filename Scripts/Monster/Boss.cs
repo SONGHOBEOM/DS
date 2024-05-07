@@ -94,7 +94,7 @@ public class Boss : Monster
 
     protected override IEnumerator Die()
     {
-        UIManager.Instance.OpenUI<ClearUI>();
+        UIManager.Instance.Open<ClearUI>();
         WaveTimer.clear?.Invoke();
         SoundManager.Instance.PlayClip($"{monsterData.monsterName}Die");
         return base.Die();

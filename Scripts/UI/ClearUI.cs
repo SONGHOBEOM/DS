@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [ResourceInfo("ClearUI")]
-public class ClearUI : UIBase
+public class ClearUI : UI
 {
     [SerializeField] private Image image;
 
     private bool fadeIn = true;
-    public override void Open(UIParam param)
+    public override void Open(UIParameter param)
     {
         
     }

@@ -69,7 +69,6 @@ public class InventoryManager : Singleton<InventoryManager>
                 var weaponData = item.itemData as WeaponData;
                 var playerClass = weaponData.playerClass;
                 var skillDatas = SkillHelper.GetSkillDataList(playerClass);
-                UIManager.Instance.SetSkillSprite(skillDatas);
             }
         }
     }

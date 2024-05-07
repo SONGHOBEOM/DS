@@ -14,8 +14,8 @@ public class QuestManager : Singleton<QuestManager>
     public void UpdateQuestlistItem(int level)
     {
         var questData = QuestHelper.GetQuest(level);
-        UIManager.Instance.OpenUI<QuestListItem>();
-        var questListItem = Util.FindChild<QuestListItem>(UIManager.Instance.UI);
+        UIManager.Instance.Open<QuestListItem>();
+        var questListItem = Util.FindChild<QuestListItem>(UIManager.Instance.uiRoot.gameObject);
         questListItem.SetQuestTitle(questData);
     }
 

@@ -13,7 +13,7 @@ public class DialogManager : Singleton<DialogManager>
     {
         PlayerStateHelper.isTalking = true;
         SoundManager.Instance.PlayClip(npcData.npcName);
-        var dialog = ResourceManager.Instance.Instantiate<Dialog>("Dialog", UIManager.Instance.UI.transform);
+        var dialog = ResourceManager.Instance.Instantiate<Dialog>("Dialog", UIManager.Instance.uiRoot);
         var rectTransform = dialog.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = Vector2.zero;
         dialog.npcNameText.text = STR.Get(npcData.npcName);

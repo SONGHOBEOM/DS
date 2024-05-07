@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [ResourceInfo("ShopUI")]
-public class ShopUI : UIPopup
+public class ShopUI : Popup
 {
     [SerializeField] private Text goldText;
 
@@ -19,9 +19,9 @@ public class ShopUI : UIPopup
     }
     void AddUIEvent()
     {
-        UIBase.AddUIEvent(gameObject, DraggingUI, Define.UIEvent.Drag);
-        UIBase.AddUIEvent(gameObject, SetIsDraggingUI, Define.UIEvent.ClickDown);
-        UIBase.AddUIEvent(gameObject, SetIsNotDraggingUI, Define.UIEvent.ClickUp);
+        UI.AddUIEvent(gameObject, DraggingUI, Define.UIEvent.Drag);
+        UI.AddUIEvent(gameObject, SetIsDraggingUI, Define.UIEvent.ClickDown);
+        UI.AddUIEvent(gameObject, SetIsNotDraggingUI, Define.UIEvent.ClickUp);
 
         void DraggingUI(PointerEventData data) => transform.position += (Vector3)data.delta;
         void SetIsDraggingUI(PointerEventData data)
@@ -31,7 +31,7 @@ public class ShopUI : UIPopup
         }
         void SetIsNotDraggingUI(PointerEventData data) => UIManager.Instance.SetIsDraggingUI(false);
     }
-    public override void Open(UIParam param)
+    public override void Open(UIParameter param)
     {
         base.Open(param);
 

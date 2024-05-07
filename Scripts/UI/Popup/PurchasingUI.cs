@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [ResourceInfo("PurchasingUI")]
-public class PurchasingUI : UIPopup
+public class PurchasingUI : Popup
 {
     [SerializeField] Button confirmButton;
     [SerializeField] Button cancelButton;
@@ -33,16 +33,16 @@ public class PurchasingUI : UIPopup
         cancelButton.onClick.AddListener(Close);
     }
 
-    public override void Open(UIParam param)
+    public override void Open(UIParameter param)
     {
         base.Open(param);
 
-        if (!(param is PurchasePopupUIParam))
+        if (!(param is PurchasePopupUIParameter))
         {
             Close();
             return;
         }
-        var purchasingPopup = param as PurchasePopupUIParam;
+        var purchasingPopup = param as PurchasePopupUIParameter;
         item = purchasingPopup.itemBase;
         
         ShowTotalPrice();
