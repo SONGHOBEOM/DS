@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ResourceInfo("SettingsUI")]
+[UIPrefabInfo("SettingsUI")]
 public class SettingsUI : Popup
 {
     [SerializeField] private Button saveButton;

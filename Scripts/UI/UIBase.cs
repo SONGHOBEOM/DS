@@ -30,7 +30,7 @@ public abstract class UIBase : MonoBehaviour
         }
     }
 
-    public abstract void Open(UIParam param);
+    public abstract void Open(UIParameter param);
     public virtual void Close() { }
     protected virtual void Visible() { }
     protected virtual void InVisible() { }

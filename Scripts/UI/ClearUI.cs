@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ResourceInfo("ClearUI")]
+[UIPrefabInfo("ClearUI")]
 public class ClearUI : UI
 {
     [SerializeField] private Image image;

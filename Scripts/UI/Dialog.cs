@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[ResourceInfo("Dialog", 0.3f, 19)]
+[UIPrefabInfo("Dialog", 0.3f, 19)]
 public class Dialog : MonoBehaviour
 {
     [SerializeField] private Text _npcNameText;

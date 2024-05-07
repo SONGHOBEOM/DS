@@ -47,8 +47,8 @@ public class UIManager : Singleton<UIManager>
 
     private void LoadOpen<T>(Type type, UIParameter param) where T : UI
     {
-        var resourceInfo = type.GetCustomAttribute<ResourceInfo>();
-        var name = resourceInfo.resourceName;
+        var uiPrefabInfo = type.GetCustomAttribute<UIPrefabInfo>();
+        var name = uiPrefabInfo.resourceName;
         var ui = ResourceManager.Instance.Instantiate(name, uiRoot);
         var rectTransform = ui.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = new Vector2(resourceInfo.posX, resourceInfo.posY);
